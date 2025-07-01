@@ -54,6 +54,13 @@ pipeline {
       }
     }
 
+    
+    stage('NuGet Restore') {
+      steps {
+        bat '.\\nuget.exe restore eShopOnWebdaniel.sln'
+      }
+    }
+
 
     stage('Build') {
       steps {
