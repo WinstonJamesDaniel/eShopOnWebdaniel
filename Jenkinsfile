@@ -26,7 +26,7 @@ pipeline {
         // create a dummy JSON for now
         writeFile file: "${env.TEST_JSON}", text: '''{
   "tests": [
-    "eShopOnWebdaniel.tests.PublicApiIntegrationTests.AuthEndpoints.AuthenticateEndpoint.ReturnsExpectedResultGivenCredentials",
+    "eShopOnWebdaniel.tests.PublicApiIntegrationTests.AuthEndpoints.AuthenticateEndpoint.ReturnsExpectedResultGivenCredentials"
   ]
 }'''
         echo "✅ Mocked ${env.TEST_JSON}"
@@ -61,11 +61,12 @@ pipeline {
           def report = junitKeepLongStdio?[]:[] // (we already published above)
           // for simplicity, post a comment
           def status = currentBuild.currentResult
+          def repo = 'WinstonJamesDaniel/eShopOnWebdaniel'
           sh """
             curl -s -X POST \
               -H "Authorization: token ${env.GITHUB_TOKEN}" \
               -d '{ "body": "Build **${status}** on branch `${env.BRANCH_NAME}`. See [Jenkins Build #${env.BUILD_NUMBER}](${env.BUILD_URL})." }' \
-              "https://api.github.com/repos/${env.GIT_URL.split(':')[1].replace('.git','')}/issues/${env.CHANGE_ID}/comments"
+              "https://api.github.com/repos/${repo}/issues/${env.CHANGE_ID}/comments"
           """
         }
       }
