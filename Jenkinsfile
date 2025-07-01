@@ -38,7 +38,7 @@ pipeline {
     stage('Run .NET Tests') {
       steps {
         // Assuming you have solution & test projects in the repo
-        bat 'dotnet test MySolution.sln --no-build --logger "trx;LogFileName=test_results.trx"'
+        bat 'dotnet test eShopOnWeb.sln  --logger "trx;LogFileName=test_results.trx"'
       }
       post {
         always {
