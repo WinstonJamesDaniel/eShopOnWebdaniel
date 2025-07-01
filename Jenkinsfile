@@ -33,6 +33,12 @@ pipeline {
       }
     }
 
+
+    stage('Build') {
+      steps {
+    bat '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe" eShopOnWebdaniel.sln /p:Configuration=Debug'
+      }
+    }
     stage('Run .NET Tests') {
       steps {
         // call your PS1 – pass the JSON and xml names
