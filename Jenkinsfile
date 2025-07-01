@@ -33,6 +33,27 @@ pipeline {
       }
     }
 
+    
+    stage('Install trx2junit Tool') {
+      steps {
+        powershell '''
+          if (!(Test-Path ".config/dotnet-tools.json")) {
+            dotnet new tool-manifest
+          }
+    
+          # Check if trx2junit is already installed
+          $installed = dotnet tool list | Select-String "trx2junit"
+    
+          if (!$installed) {
+            dotnet tool install trx2junit
+            Write-Host "✅ trx2junit installed"
+          } else {
+            Write-Host "ℹ️ trx2junit already present"
+          }
+        '''
+      }
+    }
+
 
     stage('Build') {
       steps {
