@@ -5,7 +5,7 @@ pipeline {
     // Will be used by the PS script
     TEST_JSON    = "testcases.json"
     RESULTS_XML  = "testResults.xml"
-    GITHUB_TOKEN = credentials('github-pat')
+    GITHUB_TOKEN = credentials('github-pat2')
   }
 
   triggers {
